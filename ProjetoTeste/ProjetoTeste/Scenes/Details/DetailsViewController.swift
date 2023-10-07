@@ -12,6 +12,7 @@ class DetailsViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var dataLabel: UILabel!
     
     var viewModel: DetailsViewModel
     
@@ -38,6 +39,7 @@ class DetailsViewController: UIViewController {
     func setupData() {
         titleLabel.text = viewModel.task.title
         descriptionLabel.text = viewModel.task.description
+        dataLabel.text = StringUtils.dataFormater(data: viewModel.task.createdAt)
     }
     
     @IBAction func editAction(_ sender: Any) {

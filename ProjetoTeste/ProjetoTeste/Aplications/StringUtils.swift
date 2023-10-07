@@ -32,4 +32,11 @@ struct StringUtils {
     static let imageSystemNameTrash = "trash"
     static let accentColor = "AccentColor"
     static let titleColor = "TitleColor"
+    
+    static func dataFormater(data: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let dataString = dateFormatter.string(from: data)
+        return dataString
+    }
 }
