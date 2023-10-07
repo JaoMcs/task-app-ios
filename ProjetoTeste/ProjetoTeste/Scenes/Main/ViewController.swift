@@ -19,13 +19,11 @@ class ViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
-
-//        taskManager.loadTasks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        taskManager.loadTasks() // Possivel erro aqui !!!!!
+        taskManager.loadTasks()
         tableView.reloadData()
     }
     
