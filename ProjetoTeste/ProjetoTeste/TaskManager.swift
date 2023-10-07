@@ -64,8 +64,6 @@ class TaskManager {
             entity.descriptions = description
         }
         
-//        entity.title = " EDITADO "
-        
         do {
             try managedContext.save()
         } catch let error {
@@ -81,6 +79,24 @@ class TaskManager {
         
         tasks.remove(at: index)
 
+        managedContext.delete(entity)
+
+        do {
+            try managedContext.save()
+        } catch let error {
+            print("Failed to delete: \(error)")
+        }
+    }
+    
+    // Remove uma tarefa de acordo com o nome no Array
+    func deleteTask(withTitle title: String) {
+        
+        guard let entity = fetchTask(withTitle: title) else { return }
+        
+        if let index = tasks.firstIndex(where: { $0.title == title }) {
+            tasks.remove(at: index)
+        }
+        
         managedContext.delete(entity)
 
         do {

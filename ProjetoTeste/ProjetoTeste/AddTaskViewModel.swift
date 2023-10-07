@@ -38,17 +38,21 @@ class AddTaskViewModel: ObservableObject {
         self.isEditTask = isEditTask
     
         if isEditTask {
-            addOrEdit = "Editar"
+            addOrEdit = "OK"
         } else {
             addOrEdit = "Adicionar"
         }
     }
     
-    // Função para cancelar e fechar a tela
+    // Função para cancelar
     func cancel() {
         title = ""
         description = ""
-        // Pensar em algo
+    }
+    
+    func remove() {
+        taskManager.deleteTask(withTitle: title)
+        reloadData?(nil)
     }
     
     func addItem() {

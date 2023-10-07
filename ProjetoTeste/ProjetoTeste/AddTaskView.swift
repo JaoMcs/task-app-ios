@@ -15,11 +15,23 @@ struct AddTaskView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                TextField("Título", text: $viewModel.title, axis: .vertical)
-                TextField("Descrição", text: $viewModel.description, axis: .vertical)
-                    .frame(minHeight: 150, alignment: .top)
+            VStack {
+                List {
+                    TextField("Título", text: $viewModel.title, axis: .vertical)
+                    TextField("Descrição", text: $viewModel.description, axis: .vertical)
+                        .frame(minHeight: 150, alignment: .top)
 
+                }
+                if viewModel.isEditTask {
+                    Button(action: {
+                        viewModel.remove()
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "trash")
+                            .font(.largeTitle)
+                            .foregroundColor(.red)
+                    }
+                }
             }
             .navigationTitle("Nova Tarefa")
             .navigationBarTitleDisplayMode(.inline)

@@ -44,11 +44,13 @@ class DetailsViewController: UIViewController {
         let vm = AddTaskViewModel(title: viewModel.task.title,
                                   description: viewModel.task.description,
                                   taskManager: viewModel.taskManager,
-                                  reloadData: { task in
+                                  reloadData: { [self] task in
             if let task {
                 self.viewModel.task = task
+                self.setupData()
+            } else {
+                backAction(self)
             }
-            self.setupData()
         },
                                   isEditTask: true)
 
