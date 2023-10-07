@@ -11,8 +11,6 @@ class TaskManager {
 
     private var tasks: [Task] = []
     
-    private let taskEntities = "TaskEntities"
-    
     let managedContext: NSManagedObjectContext = {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             let context = appDelegate.persistentContainer.viewContext
@@ -120,7 +118,7 @@ class TaskManager {
     func fetchTasks() {
         tasks.removeAll()
         
-        let fetchRequest = NSFetchRequest<TaskEntities>(entityName: taskEntities)
+        let fetchRequest = NSFetchRequest<TaskEntities>(entityName: StringUtils.taskEntities)
         
         do {
             let taskEntities = try managedContext.fetch(fetchRequest)
@@ -134,7 +132,7 @@ class TaskManager {
     }
     
     func fetchTask(withTitle title: String) -> TaskEntities? {
-        let fetchRequest = NSFetchRequest<TaskEntities>(entityName: taskEntities)
+        let fetchRequest = NSFetchRequest<TaskEntities>(entityName: StringUtils.taskEntities)
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = NSPredicate(format: "title == %@", title)
 
@@ -157,9 +155,9 @@ struct Task: Codable {
 
 extension Task {
     init(fromManagedObject managedObject: NSManagedObject) {
-        self.title = managedObject.value(forKey: "title") as? String ?? ""
-        self.description = managedObject.value(forKey: "descriptions") as? String ?? ""
-        self.createdAt = managedObject.value(forKey: "date") as? Date ?? Date()
+        self.title = managedObject.value(forKey: StringUtils.titleKey) as? String ?? ""
+        self.description = managedObject.value(forKey: StringUtils.descriptionKey) as? String ?? ""
+        self.createdAt = managedObject.value(forKey: StringUtils.dateKey) as? Date ?? Date()
     }
 }
 

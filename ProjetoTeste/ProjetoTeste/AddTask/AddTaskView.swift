@@ -17,8 +17,8 @@ struct AddTaskView: View {
         NavigationView {
             VStack {
                 List {
-                    TextField("Título", text: $viewModel.title, axis: .vertical)
-                    TextField("Descrição", text: $viewModel.description, axis: .vertical)
+                    TextField(StringUtils.title, text: $viewModel.title, axis: .vertical)
+                    TextField(StringUtils.description, text: $viewModel.description, axis: .vertical)
                         .frame(minHeight: 150, alignment: .top)
 
                 }
@@ -27,29 +27,29 @@ struct AddTaskView: View {
                         viewModel.remove()
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
-                        Image(systemName: "trash")
+                        Image(systemName: StringUtils.imageSystemNameTrash)
                             .font(.largeTitle)
                             .foregroundColor(.red)
                     }
                 }
             }
-            .navigationTitle("Nova Tarefa")
+            .navigationTitle(StringUtils.navigationTitleNewTaks)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(Color("AccentColor"), for: .navigationBar)
+            .toolbarBackground(Color(StringUtils.accentColor), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(viewModel.addOrEdit) {
                         viewModel.addItem()
                         self.presentationMode.wrappedValue.dismiss()
-                    }.tint(Color("TitleColor"))
+                    }.tint(Color(StringUtils.titleColor))
                         .disabled(viewModel.title.isEmpty || viewModel.description.isEmpty)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button(viewModel.cancelarString) {
                         viewModel.cancel()
                         self.presentationMode.wrappedValue.dismiss()
-                    }.tint(Color("TitleColor"))
+                    }.tint(Color(StringUtils.titleColor))
                 }
             }
         }

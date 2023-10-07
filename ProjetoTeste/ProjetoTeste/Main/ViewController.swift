@@ -13,8 +13,6 @@ class ViewController: UIViewController {
 
     /// Gerenciador de tarefas
     let taskManager = TaskManager()
-    
-    private let titleKey = "title"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +46,7 @@ extension ViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtils.identifierTaskCell, for: indexPath) as! TaskTableViewCell
         let task = taskManager.getTasks()[indexPath.row]
         cell.titleLabel.text = task.title
         return cell
@@ -64,7 +62,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "taskDetails", sender: self)
+        performSegue(withIdentifier: StringUtils.identifierTaskDetails, sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

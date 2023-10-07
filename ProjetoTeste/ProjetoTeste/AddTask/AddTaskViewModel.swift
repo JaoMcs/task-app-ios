@@ -13,7 +13,7 @@ class AddTaskViewModel: ObservableObject {
     @Published var description: String = ""
     
     var addOrEdit: String
-    let cancelarString = "Cancelar"
+    let cancelarString = StringUtils.cancel
     
     var isEditTask: Bool
     var oldTitle: String
@@ -38,9 +38,9 @@ class AddTaskViewModel: ObservableObject {
         self.isEditTask = isEditTask
     
         if isEditTask {
-            addOrEdit = "OK"
+            addOrEdit = StringUtils.ok
         } else {
-            addOrEdit = "Adicionar"
+            addOrEdit = StringUtils.add
         }
     }
     
